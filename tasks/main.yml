@@ -1,0 +1,37 @@
+---
+# tasks file for ansible-role-iobroker
+
+- include_vars: "{{ ansible_os_family }}.yml"
+
+- include: "install-{{ ansible_os_family }}.yml"
+
+- name: Create log directory
+  file:
+    path: "{{ iobroker_log_dir }}"
+    mode: 0755
+    owner: "{{ iobroker_user }}"
+    group: "{{ iobroker_group }}"
+    state: directory
+  notify: Restart iobroker
+
+- name: Create db directory
+  file:
+    path: "{{ iobroker_db_dir }}"
+    mode: 0755
+    owner: "{{ iobroker_user }}"
+    group: "{{ iobroker_group }}"
+    state: directory
+  notify: Restart iobroker
+
+- name: Create iobroker.conf
+  template:
+    src: iobroker.conf.j2
+    dest: "{{ iobroker_conf_file }}"
+    validate: echo %s
+  notify: Restart iobroker
+
+- name: Start iobroker
+  service:
+    name: "{{ iobroker_service }}"
+    enabled: true
+    state: started

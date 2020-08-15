@@ -1,0 +1,6 @@
+---
+
+- name: Install iobroker
+  pkgng:
+    name: iobroker
+    state: present

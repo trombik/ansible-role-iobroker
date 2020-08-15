@@ -1,0 +1,6 @@
+---
+
+- name: Restart iobroker
+  service:
+    name: iobroker
+    state: restarted

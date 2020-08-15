@@ -1,0 +1,9 @@
+---
+iobroker_user: iobroker
+iobroker_group: iobroker
+iobroker_log_dir: /var/log/iobroker
+iobroker_db_dir: "{{ __iobroker_db_dir }}"
+iobroker_service: iobroker
+iobroker_conf_dir: "{{ __iobroker_conf_dir }}"
+iobroker_conf_file: "{{ __iobroker_conf_dir }}/iobroker.conf"
+iobroker_flags: ""

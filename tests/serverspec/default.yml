@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  roles:
+    - ansible-role-iobroker
+  vars:
+    iobroker_config: ""
