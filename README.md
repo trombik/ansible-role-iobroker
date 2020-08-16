@@ -19,7 +19,6 @@ None
 # Example Playbook
 
 ```yaml
----
 - hosts: localhost
   roles:
     - name: trombik.apt_repo
@@ -30,7 +29,7 @@ None
     - name: ansible-role-iobroker
   vars:
     os_nodejs_package:
-      FreeBSD: www/npm-node10
+      FreeBSD: www/node10
       Debian: "{{ __nodejs_package }}"
       RedHat: "{{ __nodejs_package }}"
     nodejs_package: "{{ os_nodejs_package[ansible_os_family] }}"
