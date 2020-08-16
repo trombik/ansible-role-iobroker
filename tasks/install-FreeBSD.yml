@@ -11,6 +11,8 @@
     mode: "0755"
 
 - name: Update libnghttp2
+  # XXX workaround lib version mismatch
+  # https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=241643
   pkgng:
     name: libnghttp2
     state: latest
