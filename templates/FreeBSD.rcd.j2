@@ -1,0 +1,39 @@
+#!/bin/sh
+#
+# PROVIDE: iobroker
+# REQUIRE: DAEMON
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="iobroker"
+rcvar="iobroker_enable"
+
+load_rc_config $name
+
+iobroker_enable=${iobroker_enable-"NO"}
+iobroker_pidfile=${iobroker_pidfile-"/usr/local/iobroker/node_modules/iobroker.js-controller/iobroker.pid"}
+
+start_cmd="${name}_start"
+stop_cmd="${name}_stop"
+status_cmd="${name}_status"
+command="/usr/local/iobroker/iobroker"
+PATH="${PATH}:/usr/local/bin"
+pidfile="${iobroker_pidfile}"
+
+iobroker_start()
+{
+    ${command} start
+}
+
+iobroker_stop()
+{
+    ${command} stop
+}
+
+iobroker_status()
+{
+    ${command} status
+}
+
+run_rc_command "$1"

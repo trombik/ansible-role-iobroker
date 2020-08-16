@@ -21,6 +21,14 @@ provisioner:
     - filter_plugins
 
 platforms:
+  - name: freebsd-12.1-amd64
+    driver:
+      box: trombik/ansible-freebsd-12.1-amd64
+      box_check_update: false
+    provisioner:
+      extra_vars:
+        ansible_python_interpreter: '/usr/local/bin/python3'
+
   - name: ubuntu-18.04-amd64
     driver:
       box: trombik/ansible-ubuntu-18.04-amd64

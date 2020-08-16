@@ -1,6 +1,22 @@
 ---
 
-- name: Install iobroker
+- name: Install iobroker_required_packages
   pkgng:
-    name: iobroker
-    state: present
+    name: "{{ iobroker_required_packages }}"
+
+- name: Create rc.subr file
+  template:
+    src: FreeBSD.rcd.j2
+    dest: "/usr/local/etc/rc.d/{{ iobroker_service }}"
+    mode: "0755"
+
+- name: Update libnghttp2
+  pkgng:
+    name: libnghttp2
+    state: latest
+
+
+- name: Enable iobroker
+  service:
+    name: "{{ iobroker_service }}"
+    enabled: yes

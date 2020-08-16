@@ -1,6 +1,8 @@
 ---
 __iobroker_user: iobroker
 __iobroker_group: "{{ __iobroker_user }}"
+__iobroker_groups:
+  - dialer
 __iobroker_service: iobroker
 __iobroker_required_packages:
   - sudo
@@ -12,4 +14,5 @@ __iobroker_required_packages:
   - dbus
   - nss_mdns
   - gcc
-  - lang/python
+  - lang/python3
+__iobroker_dir: /usr/local/iobroker
