@@ -39,10 +39,9 @@
   become: yes
   become_user: "{{ iobroker_user }}"
   environment:
-    #PATH: "{{ ansible_env.PATH }}:/usr/local/bin"
     AUTOMATED_INSTALLER: "true"
 
-- name: Install iobroker dependencies
+- name: Install iobroker npm dependencies
   npm:
     registry: "{{ iobroker_npm_registry }}"
     path: "{{ iobroker_dir }}"
