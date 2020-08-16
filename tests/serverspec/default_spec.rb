@@ -13,13 +13,13 @@ ports   = [
   9001
 ]
 groups = case os[:family]
-         when "ubuntu"
+         when "ubuntu", "redhat"
            %w[audio dialout tty video]
          when "freebsd"
            %w[dialer]
          end
 iobroker_root = case os[:family]
-                when "ubuntu"
+                when "ubuntu", "redhat"
                   "/opt/iobroker"
                 when "freebsd"
                   "/usr/local/iobroker"
