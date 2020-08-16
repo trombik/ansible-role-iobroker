@@ -9,6 +9,7 @@
     src: FreeBSD.rcd.j2
     dest: "/usr/local/etc/rc.d/{{ iobroker_service }}"
     mode: "0755"
+    validate: sh -n %s
 
 - name: Update libnghttp2
   # XXX workaround lib version mismatch
