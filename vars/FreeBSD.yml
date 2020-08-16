@@ -1,3 +1,15 @@
 ---
-__iobroker_db_dir: /var/db/iobroker
-__iobroker_conf_dir: /usr/local/etc/iobroker
+__iobroker_user: iobroker
+__iobroker_group: "{{ __iobroker_user }}"
+__iobroker_service: iobroker
+__iobroker_required_packages:
+  - sudo
+  - git
+  - curl
+  - bash
+  - unzip
+  - avahi-libdns
+  - dbus
+  - nss_mdns
+  - gcc
+  - lang/python

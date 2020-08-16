@@ -5,30 +5,53 @@
 
 - include: "install-{{ ansible_os_family }}.yml"
 
-- name: Create log directory
+- name: Create iobroker_group
+  group:
+    name: "{{ iobroker_group }}"
+
+- name: Create iobroker_user
+  user:
+    name: "{{ iobroker_user }}"
+    group: "{{ iobroker_group }}"
+    groups: "{{ iobroker_groups }}"
+    home: "{{ iobroker_dir }}"
+
+- name: Create iobroker_dir
   file:
-    path: "{{ iobroker_log_dir }}"
-    mode: 0755
+    path: "{{ iobroker_dir }}"
+    state: directory
     owner: "{{ iobroker_user }}"
     group: "{{ iobroker_group }}"
-    state: directory
-  notify: Restart iobroker
 
-- name: Create db directory
-  file:
-    path: "{{ iobroker_db_dir }}"
-    mode: 0755
-    owner: "{{ iobroker_user }}"
-    group: "{{ iobroker_group }}"
-    state: directory
-  notify: Restart iobroker
-
-- name: Create iobroker.conf
+- name: Create .npmrc
   template:
-    src: iobroker.conf.j2
-    dest: "{{ iobroker_conf_file }}"
-    validate: echo %s
-  notify: Restart iobroker
+    src: npmrc.j2
+    dest: "{{ iobroker_dir }}/.npmrc"
+    owner: "{{ iobroker_user }}"
+    group: "{{ iobroker_group }}"
+
+- name: Install iobroker
+  npm:
+    name: "{{ iobroker_npm_package }}"
+    registry: "{{ iobroker_npm_registry }}"
+    path: "{{ iobroker_dir }}"
+    unsafe_perm: yes
+  become: yes
+  become_user: "{{ iobroker_user }}"
+  environment:
+    AUTOMATED_INSTALLER: "true"
+
+- name: Install iobroker dependencies
+  npm:
+    registry: "{{ iobroker_npm_registry }}"
+    path: "{{ iobroker_dir }}"
+    production: yes
+    unsafe_perm: yes
+  become: yes
+  become_user: "{{ iobroker_user }}"
+  environment:
+    AUTOMATED_INSTALLER: "true"
+
 
 - name: Start iobroker
   service:

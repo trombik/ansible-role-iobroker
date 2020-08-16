@@ -1,0 +1,16 @@
+---
+
+- name: Install iobroker_required_packages
+  apt:
+    name: "{{ iobroker_required_packages }}"
+
+- name: Create systemd file
+  template:
+    src: systemd.j2
+    dest: "/lib/systemd/system/{{ iobroker_service }}.service"
+    mode: '0644'
+
+- name: Enable iobroker
+  service:
+    name: "{{ iobroker_service }}"
+    enabled: yes

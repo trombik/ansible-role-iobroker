@@ -1,0 +1,17 @@
+# Managed by ansible
+[Unit]
+Description=ioBroker Server
+Documentation=http://iobroker.net
+After=network.target redis.service influxdb.service mysql-server.service mariadb-server.service
+Wants=redis.service influxdb.service mysql-server.service mariadb-server.service
+
+[Service]
+Type=simple
+User={{ iobroker_user }}
+Environment="NODE=\$(which node)"
+# ExecStart=/bin/sh -c '\${NODE} {{ iobroker_dir }}/node_modules/iobroker.js-controller/controller.js'
+ExecStart=/bin/sh -c '/usr/bin/node {{ iobroker_dir }}/node_modules/iobroker.js-controller/controller.js'
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

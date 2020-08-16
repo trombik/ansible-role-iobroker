@@ -1,0 +1,27 @@
+---
+__iobroker_user: iobroker
+__iobroker_group: "{{ __iobroker_user }}"
+__iobroker_groups:
+  - audio
+  - dialout
+  - tty
+  - video
+__iobroker_service: iobroker
+__iobroker_required_packages:
+  - acl
+  - sudo
+  - libcap2-bin
+  - build-essential
+  - gcc
+  - g++
+  - make
+  - libavahi-compat-libdnssd-dev
+  - libudev-dev
+  - libpam0g-dev
+  - pkg-config
+  - git
+  - curl
+  - unzip
+  - net-tools
+  - python3-dev
+__iobroker_dir: /opt/iobroker

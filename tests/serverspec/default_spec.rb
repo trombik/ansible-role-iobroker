@@ -1,49 +1,51 @@
 require "spec_helper"
 require "serverspec"
 
-package = "iobroker"
+npm_packages = %w[
+  iobroker
+]
 service = "iobroker"
-config  = "/etc/iobroker/iobroker.conf"
 user    = "iobroker"
 group   = "iobroker"
-ports   = [PORTS]
-log_dir = "/var/log/iobroker"
-db_dir  = "/var/lib/iobroker"
+ports   = [
+  8081, # Web UI
+  9000,
+  9001
+]
+groups = case os[:family]
+         when "ubuntu"
+           %w[audio dialout tty video]
+         end
+iobroker_root = case os[:family]
+                when "ubuntu"
+                  "/opt/iobroker"
+                end
 
-case os[:family]
-when "freebsd"
-  config = "/usr/local/etc/iobroker.conf"
-  db_dir = "/var/db/iobroker"
-end
-
-describe package(package) do
-  it { should be_installed }
-end
-
-describe file(config) do
-  it { should be_file }
-  its(:content) { should match Regexp.escape("iobroker") }
-end
-
-describe file(log_dir) do
+describe group(group) do
   it { should exist }
-  it { should be_mode 755 }
-  it { should be_owned_by user }
-  it { should be_grouped_into group }
 end
 
-describe file(db_dir) do
+describe user(user) do
   it { should exist }
-  it { should be_mode 755 }
-  it { should be_owned_by user }
-  it { should be_grouped_into group }
-end
-
-case os[:family]
-when "freebsd"
-  describe file("/etc/rc.conf.d/iobroker") do
-    it { should be_file }
+  it { should belong_to_primary_group group }
+  groups.each do |g|
+    it { should belong_to_group g }
   end
+  it { should have_home_directory iobroker_root }
+end
+
+describe command "cd #{iobroker_root} && npm ls" do
+  its(:exit_status) { should eq 0 }
+  its(:stderr) { should eq "" }
+  npm_packages.each do |p|
+    its(:stdout) { should match(/#{p}@\d+\.\d+\.\d+$/) }
+  end
+end
+
+describe command "#{iobroker_root}/iob status" do
+  its(:exit_status) { should eq 0 }
+  its(:stderr) { should eq "" }
+  its(:stdout) { should match(/At least one iobroker host is running/) }
 end
 
 describe service(service) do

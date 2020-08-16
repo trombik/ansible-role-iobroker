@@ -1,9 +1,11 @@
 ---
-iobroker_user: iobroker
-iobroker_group: iobroker
-iobroker_log_dir: /var/log/iobroker
-iobroker_db_dir: "{{ __iobroker_db_dir }}"
-iobroker_service: iobroker
-iobroker_conf_dir: "{{ __iobroker_conf_dir }}"
-iobroker_conf_file: "{{ __iobroker_conf_dir }}/iobroker.conf"
+iobroker_user: "{{ __iobroker_user }}"
+iobroker_group: "{{ __iobroker_group }}"
+iobroker_groups: "{{ __iobroker_groups }}"
+iobroker_dir: "{{ __iobroker_dir }}"
+iobroker_log_dir: "{{ iobroker_dir }}/log"
+iobroker_required_packages: "{{ __iobroker_required_packages }}"
+iobroker_npm_package: iobroker
+iobroker_npm_registry: https://registry.npmjs.org
+iobroker_service: "{{ __iobroker_service }}"
 iobroker_flags: ""
