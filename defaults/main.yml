@@ -3,7 +3,6 @@ iobroker_user: "{{ __iobroker_user }}"
 iobroker_group: "{{ __iobroker_group }}"
 iobroker_groups: "{{ __iobroker_groups }}"
 iobroker_dir: "{{ __iobroker_dir }}"
-iobroker_log_dir: "{{ iobroker_dir }}/log"
 iobroker_required_packages: "{{ __iobroker_required_packages }}"
 iobroker_npm_package: iobroker
 iobroker_npm_registry: https://registry.npmjs.org
