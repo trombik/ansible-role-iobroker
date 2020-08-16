@@ -19,6 +19,27 @@ None
 # Example Playbook
 
 ```yaml
+---
+- hosts: localhost
+  roles:
+    - name: trombik.apt_repo
+      when: ansible_os_family == 'Debian'
+    - name: trombik.nodejs
+    - name: ansible-role-iobroker
+  vars:
+    os_nodejs_package:
+      FreeBSD: www/npm-node10
+      Debian: "{{ __nodejs_package }}"
+    nodejs_package: "{{ os_nodejs_package[ansible_os_family] }}"
+    os_nodejs_npm_package:
+      FreeBSD: www/npm-node10
+      Debian: "{{ __nodejs_package }}"
+    nodejs_npm_package: "{{ os_nodejs_npm_package[ansible_os_family] }}"
+
+    apt_repo_keys_to_add:
+      - https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+    apt_repo_to_add:
+      - "deb https://deb.nodesource.com/node_10.x {{ ansible_distribution_release }} main"
 ```
 
 # License
