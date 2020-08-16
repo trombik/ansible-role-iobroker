@@ -19,7 +19,6 @@ None
 # Example Playbook
 
 ```yaml
----
 - hosts: localhost
   roles:
     - name: trombik.apt_repo
