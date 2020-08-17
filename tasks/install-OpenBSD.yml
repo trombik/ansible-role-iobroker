@@ -1,0 +1,19 @@
+---
+
+- name: Install iobroker_required_packages
+  openbsd_pkg:
+    name: "{{ iobroker_required_packages }}"
+
+- name: Create rc.d file
+  template:
+    src: OpenBSD.rcd.j2
+    dest: "/etc/rc.d/{{ iobroker_service }}"
+    mode: "0755"
+    validate: sh -n %s
+  notify:
+    - Restart iobroker
+
+- name: Enable iobroker
+  service:
+    name: "{{ iobroker_service }}"
+    enabled: yes

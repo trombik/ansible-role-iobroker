@@ -13,11 +13,13 @@
       FreeBSD: www/node12
       Debian: "{{ __nodejs_package }}"
       RedHat: "{{ __nodejs_package }}"
+      OpenBSD: "{{ __nodejs_package }}"
     nodejs_package: "{{ os_nodejs_package[ansible_os_family] }}"
     os_nodejs_npm_package:
       FreeBSD: www/npm-node12
       Debian: "{{ __nodejs_package }}"
       RedHat: "{{ __nodejs_package }}"
+      OpenBSD: "{{ __nodejs_package }}"
     nodejs_npm_package: "{{ os_nodejs_npm_package[ansible_os_family] }}"
 
     apt_repo_keys_to_add:

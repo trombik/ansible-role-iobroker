@@ -5,23 +5,29 @@ npm_packages = %w[
   iobroker
 ]
 service = "iobroker"
-user    = "iobroker"
-group   = "iobroker"
+user    = case os[:family]
+          when "openbsd"
+            "_iobroker"
+          else
+            "iobroker"
+          end
+group   = user
 ports   = [
   8081, # Web UI
   9000,
   9001
 ]
+# I am not yet sure which group is necessary and why.
 groups = case os[:family]
          when "ubuntu", "redhat"
            %w[audio dialout tty video]
-         when "freebsd"
+         when "freebsd", "openbsd"
            %w[dialer]
          end
 iobroker_root = case os[:family]
                 when "ubuntu", "redhat"
                   "/opt/iobroker"
-                when "freebsd"
+                when "freebsd", "openbsd"
                   "/usr/local/iobroker"
                 end
 

@@ -1,0 +1,22 @@
+#!/bin/ksh
+
+daemon="/usr/local/iobroker/iobroker"
+daemon_user="_iobroker"
+
+. /etc/rc.d/rc.subr
+
+rc_reload=NO
+
+rc_start() {
+	${rcexec} "${daemon} ${daemon_flags} start"
+}
+
+rc_stop() {
+	${daemon} ${daemon_flags} stop
+}
+
+rc_check() {
+	${daemon} ${daemon_flags} status
+}
+
+rc_cmd $1

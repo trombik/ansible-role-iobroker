@@ -1,0 +1,18 @@
+---
+__iobroker_user: _iobroker
+__iobroker_group: "{{ __iobroker_user }}"
+__iobroker_groups:
+  - dialer
+__iobroker_service: iobroker
+__iobroker_required_packages:
+  - sudo
+  - git
+  - curl
+  - bash
+  - unzip--
+  - avahi
+  - dbus
+  # XXX net/openmdns maybe?
+  # - nss_mdns
+  - gcc
+__iobroker_dir: /usr/local/iobroker
