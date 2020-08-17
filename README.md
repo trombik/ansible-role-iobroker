@@ -1,6 +1,6 @@
 # ansible-role-iobroker
 
-A brief description of the role goes here.
+Manage `iobroker`, a home automation system.
 
 # Requirements
 
@@ -8,9 +8,61 @@ None
 
 # Role Variables
 
-| variable | description | default |
+| Variable | Description | Default |
 |----------|-------------|---------|
+| `iobroker_user` | User name of `iobroker` | `{{ __iobroker_user }}` |
+| `iobroker_group` | Group name of `iobroker` | `{{ __iobroker_group }}` |
+| `iobroker_groups` | Extra groups of user `iobroker` | `{{ __iobroker_groups }}` |
+| `iobroker_dir` | Path to root directory of `iobroker` | `{{ __iobroker_dir }}` |
+| `iobroker_required_packages` | Required packages by `iobroker` | `{{ __iobroker_required_packages }}` |
+| `iobroker_npm_package` | `npm` package name of `iobroker` | `iobroker` |
+| `iobroker_npm_registry` | URL of `npm` package registry | `https://registry.npmjs.org` |
+| `iobroker_service` | Service name of `iobroker` | `{{ __iobroker_service }}` |
+| `iobroker_flags` | Not implemented yet | `""` |
 
+## Debian
+
+| Variable | Default |
+|----------|---------|
+| `__iobroker_user` | `iobroker` |
+| `__iobroker_group` | `{{ __iobroker_user }}` |
+| `__iobroker_groups` | `["audio", "dialout", "tty", "video"]` |
+| `__iobroker_service` | `iobroker` |
+| `__iobroker_required_packages` | `["acl", "sudo", "libcap2-bin", "build-essential", "gcc", "g++", "make", "libavahi-compat-libdnssd-dev", "libudev-dev", "libpam0g-dev", "pkg-config", "git", "curl", "unzip", "net-tools", "python3-dev"]` |
+| `__iobroker_dir` | `/opt/iobroker` |
+
+## FreeBSD
+
+| Variable | Default |
+|----------|---------|
+| `__iobroker_user` | `iobroker` |
+| `__iobroker_group` | `{{ __iobroker_user }}` |
+| `__iobroker_groups` | `["dialer"]` |
+| `__iobroker_service` | `iobroker` |
+| `__iobroker_required_packages` | `["sudo", "git", "curl", "bash", "unzip", "avahi-libdns", "dbus", "nss_mdns", "gcc", "lang/python3"]` |
+| `__iobroker_dir` | `/usr/local/iobroker` |
+
+## OpenBSD
+
+| Variable | Default |
+|----------|---------|
+| `__iobroker_user` | `_iobroker` |
+| `__iobroker_group` | `{{ __iobroker_user }}` |
+| `__iobroker_groups` | `["dialer"]` |
+| `__iobroker_service` | `iobroker` |
+| `__iobroker_required_packages` | `["sudo", "git", "curl", "bash", "unzip--", "avahi", "dbus", "gcc"]` |
+| `__iobroker_dir` | `/usr/local/iobroker` |
+
+## RedHat
+
+| Variable | Default |
+|----------|---------|
+| `__iobroker_user` | `iobroker` |
+| `__iobroker_group` | `{{ __iobroker_user }}` |
+| `__iobroker_groups` | `["audio", "dialout", "tty", "video"]` |
+| `__iobroker_service` | `iobroker` |
+| `__iobroker_required_packages` | `["acl", "avahi", "avahi-compat-libdns_sd", "avahi-compat-libdns_sd-devel", "curl", "gcc", "gcc-c++", "git", "libcap", "pam-devel", "libudev-devel", "make", "net-tools", "pkgconfig", "python3-devel", "sudo", "unzip"]` |
+| `__iobroker_dir` | `/opt/iobroker` |
 
 # Dependencies
 
