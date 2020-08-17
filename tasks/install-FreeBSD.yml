@@ -10,6 +10,8 @@
     dest: "/usr/local/etc/rc.d/{{ iobroker_service }}"
     mode: "0755"
     validate: sh -n %s
+  notify:
+    - Restart iobroker
 
 - name: Update libnghttp2
   # XXX workaround lib version mismatch
@@ -17,7 +19,6 @@
   pkgng:
     name: libnghttp2
     state: latest
-
 
 - name: Enable iobroker
   service:

@@ -9,6 +9,8 @@
     src: systemd.j2
     dest: "/lib/systemd/system/{{ iobroker_service }}.service"
     mode: '0644'
+  notify:
+    - Restart iobroker
 
 - name: Enable iobroker
   service:
