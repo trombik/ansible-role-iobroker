@@ -55,7 +55,7 @@ end
 describe command "#{iobroker_root}/iob status" do
   its(:exit_status) { should eq 0 }
   its(:stderr) { should eq "" }
-  its(:stdout) { should match(/At least one iobroker host is running/) }
+  its(:stdout) { should match(/(?:At least one iobroker host is running|iobroker is running on this host)/) }
 end
 
 describe service(service) do
