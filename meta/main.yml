@@ -9,13 +9,16 @@ galaxy_info:
   platforms:
     - name: FreeBSD
       versions:
-        - 12.0
+        - 12.1
+        - 13.0
     - name: Ubuntu
       versions:
         - bionic
+        - focal
     - name: OpenBSD
       versions:
-        - 6.7
+        - 6.8
+        - 6.9
     - name: EL
       versions:
         - 7
