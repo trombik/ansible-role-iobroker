@@ -8,15 +8,15 @@ daemon_user="_iobroker"
 rc_reload=NO
 
 rc_start() {
-	${rcexec} "${daemon} ${daemon_flags} start"
+	su -l -c ${daemon_class} -s /bin/sh ${daemon_user} -c "node ${daemon} ${daemon_flags} start"
 }
 
 rc_stop() {
-	${daemon} ${daemon_flags} stop
+	su -l -c ${daemon_class} -s /bin/sh ${daemon_user} -c "node ${daemon} ${daemon_flags} stop"
 }
 
 rc_check() {
-	${daemon} ${daemon_flags} status
+	su -l -c ${daemon_class} -s /bin/sh ${daemon_user} -c "node ${daemon} ${daemon_flags} status"
 }
 
 rc_cmd $1
